@@ -302,3 +302,59 @@ footer strong {
     }
 
 }
+
+/* ---------- CORRECCION MOVIL ---------- */
+
+@media (max-width: 768px) {
+
+    html, body{
+        width:100%;
+        overflow-x:hidden;
+    }
+
+    main{
+        width:100%;
+        max-width:100%;
+        margin:0 auto;
+        padding:20px;
+        box-shadow:none;
+    }
+
+    section{
+        width:100%;
+    }
+
+    /* ---------- IMAGENES ---------- */
+
+    img{
+        display:block;
+        max-width:100%;
+        width:100%;
+        height:auto;
+        margin:20px auto;
+    }
+
+    /* imagenes de diagramas */
+    .imagen-diagrama{
+        width:100%;
+        max-width:100%;
+        margin:20px auto;
+    }
+
+    /* ---------- TABLAS ---------- */
+
+    table{
+        width:100%;
+        display:block;
+        overflow-x:auto;
+    }
+
+    /* ---------- CODIGO ---------- */
+
+    pre{
+        overflow-x:auto;
+        white-space:pre-wrap;
+        word-break:break-word;
+    }
+
+}
