@@ -253,3 +253,52 @@ footer strong {
         columns: 1;
     }
 }
+
+/* ---------- RESPONSIVE MOVIL ---------- */
+
+@media (max-width: 768px) {
+
+    body {
+        overflow-x: hidden;
+    }
+
+    main {
+        width: 100%;
+        max-width: 100%;
+        margin: 0;
+        padding: 20px 15px;
+    }
+
+    header {
+        padding: 50px 15px 35px 15px;
+    }
+
+    header h1 {
+        font-size: 2rem;
+    }
+
+    section {
+        width: 100%;
+    }
+
+    /* tablas adaptables */
+    table {
+        display: block;
+        overflow-x: auto;
+        width: 100%;
+    }
+
+    /* bloques de código adaptables */
+    pre {
+        overflow-x: auto;
+        white-space: pre-wrap;
+        word-wrap: break-word;
+    }
+
+    /* evitar que imágenes rompan el layout */
+    img {
+        max-width: 100%;
+        height: auto;
+    }
+
+}
