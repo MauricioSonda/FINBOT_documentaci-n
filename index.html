@@ -29,18 +29,13 @@
                 <li><a href="#mision-vision-mercado">Misión, Visión y Mercado</a></li>
                 <li><a href="#arquitectura-sistema">Arquitectura del Sistema</a></li>
                 <li><a href="#stack-tecnologico">Stack Tecnológico</a></li>
-                <li><a href="#organizacion-repositorio">Organización del Repositorio</a></li>
                 <li><a href="#modulos-frontend">Módulos del Frontend</a></li>
-                <li><a href="#modelo-datos">Modelo de Datos</a></li>
                 <li><a href="#flujo-chatbot">Flujo del Chatbot</a></li>
-                <li><a href="#documentacion-apis">Documentación de APIs</a></li>
-                <li><a href="#seguridad">Seguridad</a></li>
                 <li><a href="#escalabilidad">Escalabilidad</a></li>
                 <li><a href="#merito-tecnico">Mérito Técnico</a></li>
                 <li><a href="#viabilidad">Viabilidad</a></li>
-                <li><a href="#roadmap">Roadmap</a></li>
-                <li><a href="#riesgos">Riesgos</a></li>
-                <li><a href="#kpis">KPIs</a></li>
+                <li><a href="#roadmap-ejecucion">Roadmap</a></li>
+                <li><a href="#kpis-seguimiento">KPIs</a></li>
                 <li><a href="#conclusiones">Conclusiones</a></li>
                 <li><a href="#referencias">Referencias</a></li>
             </ol>
@@ -424,15 +419,8 @@
 
         </section>
 
-        <section id="organizacion-repositorio">
-            <h2>9. Organización del Repositorio</h2>
-
-            <img src="resources/repo_org.png" alt="Organización del repositorio de FINBOT" class="imagen-diagrama">
-
-        </section>
-
-        <section id="modulos-funcionales">
-            <h2>10. Módulos Funcionales del Frontend</h2>
+        <section id="modulos-frontend">
+            <h2>9. Módulos Funcionales del Frontend</h2>
 
             <table>
                 <thead>
@@ -489,20 +477,8 @@
             </table>
         </section>
 
-        <section id="modelo-datos-firebase">
-            <h2>11. Modelo de datos Firebase</h2>
-            <p>La estructura de datos sigue un modelo jerárquico centrado en el usuario, donde cada documento principal
-                contiene subcolecciones organizadas por dominio funcional:</p>
-
-            <img src="resources/Firebase_mod.png" alt="Modelo de datos en Firebase de FINBOT" class="imagen-diagrama">
-
-            <p>El servicio FirestoreService concentra todas las operaciones sobre esta estructura, y los modelos en
-                lib/models mantienen consistencia de serialización con claves en snake_case para garantizar un
-                intercambio predecible entre cliente y backend.</p>
-        </section>
-
         <section id="flujo-chatbot">
-            <h2>12. Flujo del Chatbot con Inteligencia Artificial</h2>
+            <h2>10. Flujo del Chatbot con Inteligencia Artificial</h2>
             <p>El flujo conversacional entre el usuario y el asistente financiero sigue un patrón event-driven que
                 garantiza respuestas personalizadas y en tiempo real:</p>
 
@@ -523,7 +499,7 @@
                 </li>
             </ul>
 
-            <h3>12.1 Construcción del prompt contextual</h3>
+            <h3>10.1 Construcción del prompt contextual</h3>
             <p>El prompt enviado a Gemini no es genérico. Se construye dinámicamente incluyendo:</p>
 
             <ul>
@@ -539,161 +515,26 @@
 
         </section>
 
-        <section id="documentacion-apis">
-            <h2>13. Documentación de APIs</h2>
-
-            <h3>13.1 Api Backend (Cloud Functions)</h3>
-
-            <table>
-                <thead>
-                    <tr>
-                        <th>Nombre</th>
-                        <th>Tipo</th>
-                        <th>Disparador</th>
-                        <th>Archivo</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>chatWithFinbot</td>
-                        <td>Event-driven (Firestore Trigger)</td>
-                        <td>onDocumentCreated("users/{userId}/chat_sessions/{sessionId}/messages/{messageId}")</td>
-                        <td>functions/src/index.ts</td>
-                    </tr>
-
-                </tbody>
-            </table>
-            <p>Propósito: generar respuestas del asistente financiero usando Gemini en función del contexto del usuario
-                y el historial de chat.</p>
-
-            <h3>13.2 Contrato de entrada/salida del chat</h3>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Elemento</th>
-                        <th>Campos clave</th>
-                        <th>Notas</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Entrada (mensaje del usuario)</td>
-                        <td>role, content, timestamp, is_error</td>
-                        <td>Solo se procesa cuando role === "user" y no hay error.</td>
-                    </tr>
-                    <tr>
-                        <td>Salida (respuesta del asistente)</td>
-                        <td>role: "assistant", content, timestamp, is_error</td>
-                        <td>La función escribe el mensaje de respuesta en la misma subcolección.</td>
-                    </tr>
-                    <tr>
-                        <td>Contexto adicional</td>
-                        <td>personal_info, financial_profile, preferences, financial_metrics/current</td>
-                        <td>Se consulta para personalizar el prompt y la recomendación financiera.</td>
-                    </tr>
-                </tbody>
-            </table>
-
-            <h3>13.3 Ejemplos de payloads</h3>
-            <img src="resources/payload_ex.png"
-                alt="Ejemplo de payload de entrada y salida en la función chatWithFinbot" class="imagen-diagrama">
-
-            <h3>13.4 APIs de datos (capa de aplicación)</h3>
-            <p>La app consume APIs gestionadas por el SDK de Firebase. No expone endpoints REST propios:</p>
-
-            <table>
-                <thead>
-                    <tr>
-                        <th>Grupo</th>
-                        <th>Operaciones principales</th>
-                        <th>Referencia</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Autenticación</td>
-                        <td>authStateChanges, signInWithEmailAndPassword, signOut</td>
-                        <td>lib/main.dart</td>
-                    </tr>
-                    <tr>
-                        <td>Usuarios / Perfil</td>
-                        <td>saveUser, saveUserRaw, streamUser, getUser</td>
-                        <td>lib/services/firestore_service.dart</td>
-                    </tr>
-                    <tr>
-                        <td>Métricas y Hábitos</td>
-                        <td>streamMetrics, updateMetrics, streamHabitTracking, updateHabitTracking</td>
-                        <td>lib/services/firestore_service.dart</td>
-                    </tr>
-                    <tr>
-                        <td>Gestión Financiera</td>
-                        <td>streamDebts, addDebt, deleteDebt, streamGoals, saveGoal</td>
-                        <td>lib/services/firestore_service.dart</td>
-                    </tr>
-                    <tr>
-                        <td>Insights y eventos</td>
-                        <td>streamInsights, markInsightAsRead, streamFinancialEvents, addFinancialEvent</td>
-                        <td>lib/services/firestore_service.dart</td>
-                    </tr>
-                    <tr>
-                        <td>Chatbot</td>
-                        <td>createChatSession, sendMessage, streamChatMessages</td>
-                        <td>lib/services/firestore_service.dart</td>
-                    </tr>
-                </tbody>
-            </table>
-
-            <h3>13.5 Manejo de errores y limites</h3>
-            <ul>
-                <li>Función de chat: en caso de error escribe mensaje fallback con is_error: true.</li>
-                <li>Límite MVP: addDebt valida un máximo de 5 deudas activas por usuario.</li>
-                <li>Escalado: chatWithFinbot define maxInstances: 10 para controlar concurrencia.</li>
-            </ul>
-        </section>
-
-        <section id="seguridad">
-            <h2>14. Seguridad</h2>
-
-            <h3>14.1 Firestore Security Rules</h3>
-            <p>Las reglas de Firestore restringen el acceso mediante la validación request.auth.uid == userId, lo que
-                garantiza aislamiento multiusuario completo. Cada usuario solo puede leer y escribir en su propio
-                documento y subcolecciones.</p>
-
-            <h3>14.2 Storage Rules</h3>
-            <p>Las reglas de Firebase Storage actualmente presentan una apertura temporal hasta 2026-04-07 que
-                representa un riesgo alto de seguridad. Se recomienda endurecer estas reglas antes de la fecha de
-                vencimiento, implementando permisos basados en usuario y ruta específica.</p>
-
-            <h3>14.3 Gestión de secretos</h3>
-            <ul>
-                <li>La Cloud Function utiliza el secreto GEMINI_API_KEY gestionado por Firebase Secrets, evitando
-                    exponer la llave en el código TypeScript.</li>
-                <li>• Las credenciales de Firebase Web están embebidas en el código cliente, práctica estándar pero
-                    recomendable de gestionar por ambientes (dev/stg/prod).</li>
-            </ul>
-
-        </section>
-
         <section id="escalabilidad">
-            <h2>15 Escalabilidad</h2>
+            <h2>11. Escalabilidad</h2>
             <p>La arquitectura de FINBOT ha sido diseñada con escalabilidad como principio rector. La combinación de
                 Flutter en el frontend, Firebase como backend-as-a-service y Cloud Functions como capa de procesamiento
                 serverless permite que la plataforma crezca de manera orgánica sin necesidad de reescribir componentes
                 fundamentales.</p>
 
-            <h3>15.1 Arquitectura modular y orientada a eventos</h3>
+            <h3>11.1 Arquitectura modular y orientada a eventos</h3>
             <p>El sistema sigue un patrón event-driven donde las interacciones del usuario generan documentos en
                 Firestore que disparan automáticamente funciones de backend. Esta separación de responsabilidades
                 permite escalar cada capa de forma independiente.</p>
 
-            <h3>15.2 Escalabilidad funcional</h3>
+            <h3>11.2 Escalabilidad funcional</h3>
             <p>Desde la perspectiva funcional, el producto puede escalar desde un uso individual hasta esquemas de
                 adopción con universidades, programas de inclusión e instituciones financieras. El mismo núcleo de
                 cálculo puede reutilizarse y parametrizarse para distintos contextos.</p>
         </section>
 
         <section id="merito-tecnico">
-            <h2>16. Mérito Técnico</h2>
+            <h2>12. Mérito Técnico</h2>
             <p>La fortaleza técnica de FINBOT reside en la integración ordenada de componentes que cumplen funciones
                 distintas pero complementarias:</p>
 
@@ -710,20 +551,20 @@
                 porque convierte un resultado financiero complejo en una recomendación entendible y accionable.</p>
         </section>
 
-        <section id="viabilidad-proyecto">
-            <h2>17. Viabilidad del proyecto</h2>
-            <h3>17.1 Viabilidad técnica</h3>
+        <section id="viabilidad">
+            <h2>13. Viabilidad del proyecto</h2>
+            <h3>13.1 Viabilidad técnica</h3>
             <p>FINBOT se construye sobre tecnologías probadas y ampliamente adoptadas. Flutter cuenta con soporte
                 oficial de Google. Firebase ofrece un modelo de costos escalable con generosas cuotas gratuitas para
                 MVPs. Gemini proporciona IA generativa de frontera sin necesidad de entrenar modelos propios, reduciendo
                 significativamente esfuerzo y costos operativos.</p>
 
-            <h3>17.2 Viabilidad operativa</h3>
+            <h3>13.2 Viabilidad operativa</h3>
             <p>La arquitectura serverless elimina la necesidad de gestionar infraestructura dedicada. Los despliegues
                 automatizados mediante Firebase CLI y la compilación integrada reducen fricción operativa. El modelo
                 event-driven simplifica la adición de nuevas funcionalidades.</p>
 
-            <h3>17.3 Viabilidad de mercado</h3>
+            <h3>13.3 Viabilidad de mercado</h3>
             <p>La ENSAFI del INEGI evidencia que una proporción significativa de la población mexicana experimenta
                 estrés financiero y carece de herramientas adecuadas. FINBOT se posiciona en un segmento de alta demanda
                 y baja oferta: asistencia financiera personalizada con IA, accesible desde dispositivos móviles y sin
@@ -731,9 +572,9 @@
         </section>
 
         <section id="roadmap-ejecucion">
-            <h2>18. Roadmap de ejecución</h2>
+            <h2>14. Roadmap de ejecución</h2>
 
-            <h3>18.1 Fase 1: Asegurar y estabilizar</h3>
+            <h3>14.1 Fase 1: Asegurar y estabilizar</h3>
             <ul>
                 <li>Endurecer storage.rules con permisos específicos por usuario/ruta.</li>
                 <li>Agregar logging estructurado con correlation IDs en Cloud Functions.</li>
@@ -741,7 +582,7 @@
                 <li>Implementar pruebas unitarias base para modelos y servicios clave.</li>
             </ul>
 
-            <h3>18.2 Fase 2: Modularizar</h3>
+            <h3>14.2 Fase 2: Modularizar</h3>
             <ul>
                 <li>Separar lib/main.dart por módulos: auth/, onboarding/, dashboard/, chat/.</li>
                 <li>Dividir FirestoreService en servicios por dominio (usuario, métricas, deudas, metas, chat).</li>
@@ -749,7 +590,7 @@
                 <li>Agregar pruebas para la capa de servicios.</li>
             </ul>
 
-            <h3>18.3 Fase 3: Escalar</h3>
+            <h3>14.3 Fase 3: Escalar</h3>
             <ul>
                 <li>Introducir gestión de estado consistente (Riverpod o Bloc).</li>
                 <li>Pipeline CI automatizada: lint + test + build.</li>
@@ -758,62 +599,8 @@
             </ul>
         </section>
 
-        <section id="riesgos-mitigaciones">
-            <h2>19. Riesgos y Mitigaciones</h2>
-
-            <table>
-                <thead>
-                    <tr>
-                        <th>Riesgo</th>
-                        <th>Nivel</th>
-                        <th>Impacto</th>
-                        <th>Mitigación</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Reglas de Storage temporalmente abiertas</td>
-                        <td>Alto</td>
-                        <td>Exposición de datos y riesgo reputacional</td>
-                        <td>Cerrar reglas por usuario/path y validar accesos</td>
-                    </tr>
-                    <tr>
-                        <td>Monolito UI en main.dart</td>
-                        <td>Medio</td>
-                        <td>Menor velocidad de cambios y más errores</td>
-                        <td>Refactor incremental por módulos de negocio</td>
-                    </tr>
-                    <tr>
-                        <td>Sin índices definidos para crecimiento</td>
-                        <td>Medio</td>
-                        <td>Degradación de consultas y costos operativos</td>
-                        <td>Diseñar e implementar índices Firestore</td>
-                    </tr>
-                    <tr>
-                        <td>Cobertura de pruebas limitada</td>
-                        <td>Medio</td>
-                        <td>Regresiones silenciosas y ciclos de corrección caros</td>
-                        <td>Suite mínima de unit tests + pipeline CI</td>
-                    </tr>
-                    <tr>
-                        <td>Costos de IA por mayor uso</td>
-                        <td>Medio</td>
-                        <td>Incremento de costos operativos</td>
-                        <td>Cuotas, guardrails de prompt y límites por sesión</td>
-                    </tr>
-                    <tr>
-                        <td>Consultas Firestore lentas al crecer datos</td>
-                        <td>Alto</td>
-                        <td>Degradación de experiencia de usuario</td>
-                        <td>Índices compuestos y revisión periódica de consultas</td>
-                    </tr>
-                </tbody>
-            </table>
-
-        </section>
-
         <section id="kpis-seguimiento">
-            <h2>20. KPIs de Seguimiento</h2>
+            <h2>15. KPIs de Seguimiento</h2>
 
             <ul>
                 <li>Velocidad de entrega: lead time por feature (objetivo: tendencia descendente).</li>
@@ -828,7 +615,7 @@
         </section>
 
         <section id="conclusiones">
-            <h2>21. Conclusiones</h2>
+            <h2>16. Conclusiones</h2>
 
             <p>
                 FINBOT representa una propuesta sólida, viable y de alto impacto social para abordar la brecha de
@@ -859,7 +646,7 @@
         </section>
 
         <section id="referencias">
-            <h2>23. Referencias</h2>
+            <h2>17. Referencias</h2>
 
             <ul>
                 <li>9. INEGI. Encuesta Nacional de Inclusión Financiera (ENIF), edición más reciente consultada para
@@ -885,7 +672,7 @@
     <footer>
         <p> Documentación Técnica Profesional del Proyecto</p>
         <p> Equipo: Finbot</p>
-        <p>Versión: 1.1 — Documento integral de propuesta y arquitectura técnica</p>
+        <p>Versión: 1.2 — Documento integral de propuesta y arquitectura técnica</p>
     </footer>
 
 </body>
