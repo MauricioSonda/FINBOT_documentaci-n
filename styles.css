@@ -12,7 +12,7 @@ html {
 
 body {
     font-family: "Inter", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    background-color: #f4f6f9;
+    background-color: #e0e0e0;
     color: #1f2933;
     line-height: 1.6;
 }
@@ -29,18 +29,18 @@ body {
 }
 
 .indice a:hover {
-    color: inherit;
-    text-decoration: none;
+    color: #3f6db5;
+    text-decoration-color: #3f6db5;
 }
 
 .indice a:active {
-    color: inherit;
+    color: #3f6db5;
 }
 
 .indice a:focus {
-    outline: none;
+    outline: 2px solid #3f6db5;
+    outline-offset: 2px;
 }
-
 
 /* ---------- CONTENEDOR GENERAL ---------- */
 
@@ -51,6 +51,7 @@ main {
     padding: 40px 30px;
     background: white;
     box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+    border-radius: 8px;
 }
 
 
@@ -97,8 +98,14 @@ header h1{
 
 /* ---------- SECCIONES ---------- */
 
-section {
-    margin-bottom: 50px;
+/* cada sección funciona como una hoja */
+section{
+    max-width: 100%;
+    margin: 30px auto;
+    padding: 60px 70px;
+    background: white;
+    border-radius: 6px;
+    box-shadow: 0 4px 18px rgba(0,0,0,0.08);
 }
 
 h2 {
@@ -218,10 +225,10 @@ section:first-of-type ol {
 /* ---------- FOOTER ---------- */
 
 footer {
-    margin-top: 60px;
+    margin-top: 10px;
     padding: 30px 20px;
     text-align: center;
-    background-color: #f1f5f9;
+    background-color: #e0e0e0;
     border-top: 1px solid #e5e7eb;
     font-size: 0.9rem;
     color: #6b7280;
@@ -331,3 +338,11 @@ footer strong {
     }
 
 }
+
+/* ---------- ESTILO PAGINAS TIPO WORD ---------- */
+
+main{
+    background: transparent;
+    box-shadow: none;
+}
+
