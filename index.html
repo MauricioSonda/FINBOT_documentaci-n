@@ -1,0 +1,892 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="styles.css">
+    <title>FINBOT — Documentación Técnica</title>
+</head>
+
+<body>
+
+    <header>
+        <h1>FINBOT</h1>
+        <p><strong>Asistente Financiero Inteligente para Todos</strong></p>
+
+    </header>
+
+    <main>
+
+        <section>
+            <h2>Índice General</h2>
+            <ol class="indice">
+                <li><a href="#resumen-ejecutivo">Resumen Ejecutivo</a></li>
+                <li><a href="#introduccion-contexto">Introducción y Contexto del Problema</a></li>
+                <li><a href="#descripcion-solucion">Descripción de la Solución</a></li>
+                <li><a href="#educacion-inclusion">Educación e Inclusión Financiera</a></li>
+                <li><a href="#impacto-innovacion">Impacto e Innovación</a></li>
+                <li><a href="#mision-vision-mercado">Misión, Visión y Mercado</a></li>
+                <li><a href="#arquitectura-sistema">Arquitectura del Sistema</a></li>
+                <li><a href="#stack-tecnologico">Stack Tecnológico</a></li>
+                <li><a href="#organizacion-repositorio">Organización del Repositorio</a></li>
+                <li><a href="#modulos-frontend">Módulos del Frontend</a></li>
+                <li><a href="#modelo-datos">Modelo de Datos</a></li>
+                <li><a href="#flujo-chatbot">Flujo del Chatbot</a></li>
+                <li><a href="#documentacion-apis">Documentación de APIs</a></li>
+                <li><a href="#seguridad">Seguridad</a></li>
+                <li><a href="#escalabilidad">Escalabilidad</a></li>
+                <li><a href="#merito-tecnico">Mérito Técnico</a></li>
+                <li><a href="#viabilidad">Viabilidad</a></li>
+                <li><a href="#roadmap">Roadmap</a></li>
+                <li><a href="#riesgos">Riesgos</a></li>
+                <li><a href="#kpis">KPIs</a></li>
+                <li><a href="#conclusiones">Conclusiones</a></li>
+                <li><a href="#referencias">Referencias</a></li>
+            </ol>
+        </section>
+
+        <section id="resumen-ejecutivo">
+            <h2>1. Resumen Ejecutivo</h2>
+
+            <p>FINBOT es una plataforma móvil inteligente de gestión y educación financiera personal, diseñada para
+                democratizar el acceso a orientación financiera de calidad entre jóvenes mexicanos. El proyecto combina
+                un motor financiero determinista, un asistente conversacional impulsado por inteligencia artificial
+                generativa (Gemini de Google), y una experiencia de usuario gamificada para transformar la manera en que
+                las personas comprenden, gestionan y mejoran su salud financiera.
+            </p>
+            <p>La arquitectura del sistema se sustenta en Flutter como framework multiplataforma para el frontend,
+                Firebase como backend-as-a-service (autenticación, base de datos en tiempo real, almacenamiento y
+                funciones serverless) y la API de Gemini para la generación de respuestas contextualizadas del asistente
+                financiero. Esta combinación permite una solución escalable, de bajo costo operativo inicial y con
+                capacidad de evolución continua.
+            </p>
+            <p>El presente documento constituye la documentación técnica profesional y completa del proyecto. Abarca
+                desde la propuesta de valor y la viabilidad del proyecto hasta la arquitectura detallada, el modelo de
+                datos, los flujos de integración con IA, las políticas de seguridad, el roadmap de ejecución y las
+                métricas de seguimiento. Está dirigido a evaluadores técnicos, stakeholders y cualquier interesado en
+                comprender tanto el qué como el cómo de FINBOT.
+            </p>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Aspecto</th>
+                        <th>Detalle</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Producto</td>
+                        <td>Aplicación móvil de gestión y educación financiera con IA</td>
+                    </tr>
+                    <tr>
+                        <td>Público objetivo</td>
+                        <td>Jóvenes mexicanos 18-30 años, estudiantes y primeros empleos</td>
+                    </tr>
+                    <tr>
+                        <td>Stack principal</td>
+                        <td>Flutter + Firebase + Gemini API</td>
+                    </tr>
+                    <tr>
+                        <td>Modelo de IA</td>
+                        <td>Gemini (IA generativa contextual)</td>
+                    </tr>
+                    <tr>
+                        <td>Estado actual</td>
+                        <td>MVP funcional con flujo completo de chat, onboarding, dashboard y gestión de deudas</td>
+                    </tr>
+                    <tr>
+                        <td>Diferenciador clave</td>
+                        <td>Asesoría financiera personalizada con IA contextual, no genérica</td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </section>
+
+        <section id="introduccion-contexto">
+            <h2>2. Introducción y Contexto del Problema</h2>
+
+            <h3>2.1 Problemática identificada</h3>
+
+            <p>
+                En México, más del 56% de la población adulta carece de acceso efectivo a herramientas de gestión
+                financiera personal, según la Encuesta Nacional de Inclusión Financiera (ENIF) publicada por el INEGI.
+                Millones de personas toman decisiones económicas críticas —desde el pago de deudas hasta la planeación
+                de metas de ahorro— sin contar con diagnósticos claros, simulaciones de escenarios ni orientación
+                personalizada. Esta carencia perpetúa ciclos de endeudamiento, estrés financiero y exclusión económica
+                que afectan de forma desproporcionada a los sectores más jóvenes de la sociedad.
+            </p>
+
+            <h3>2.2 Limitaciones de soluciones existentes</h3>
+
+            <p>Las soluciones existentes en el mercado, como hojas de cálculo, aplicaciones bancarias básicas o
+                asesorías presenciales, presentan limitaciones significativas: requieren conocimientos previos, carecen
+                de personalización real o resultan económicamente inaccesibles para gran parte de la población objetivo.
+                El resultado es un ecosistema financiero donde la información relevante existe, pero no llega de forma
+                comprensible ni oportuna a quienes más la necesitan.</p>
+
+            <ul>
+                <li>Hojas de cálculo: requieren conocimiento técnico y disciplina constante.</li>
+                <li>Aplicaciones bancarias: solo muestran saldo y movimientos sin análisis financiero.</li>
+                <li>Asesoría presencial: costo elevado, acceso limitado y sin seguimiento continuo.</li>
+                <li>Apps genéricas: categorizan gastos pero no asesoran.</li>
+            </ul>
+
+            <h3>2.3 La oportunidad</h3>
+
+            <p>
+                FINBOT nace para dar solución a este problema. Se trata de una plataforma móvil inteligente que
+                combina IA generativa, análisis financiero personalizado y una experiencia de
+                usuario pensada para la inclusión y aprendizaje enfocada a la población que carece de información
+                financiera
+                en México. Fomentando la curiosidad a través de una aplicación
+                interactiva y autodidacta, acompañado de un asistente conversacional basado en Gemini de Google.
+                FINBOT transforma datos financieros individuales en recomendaciones claras, simulaciones interactivas y
+                acompañamiento continuo, democratizando el acceso a la educación y la salud financiera.
+            </p>
+
+        </section>
+
+        <section id="descripcion-solucion">
+            <h2>3. Descripción de la Solución</h2>
+
+            <p>FINBOT es una aplicación multiplataforma desarrollada en Flutter que opera como una aplicación educativa
+                con modos de
+                aprendizaje en cada sección de la interfaz, además de ser impulsado por un asistente financiero
+                personal basado en inteligencia artificial generativa. La plataforma integra cuatro pilares funcionales
+                que, en
+                conjunto, ofrecen una experiencia integral de gestión financiera:</p>
+
+            <h3>3.1 Diagnóstico financiero automatizado</h3>
+            <p>
+                Desde el proceso de onboarding, FINBOT recopila información clave del usuario —ingresos, gastos
+                recurrentes, deudas vigentes y metas de ahorro— para calcular métricas objetivas como el nivel de riesgo
+                y la capacidad de pago. Este diagnóstico sirve como base para todas las recomendaciones posteriores,
+                eliminando la subjetividad y brindando un estado financiero real.
+            </p>
+
+            <h3>3.2 Asistente conversacional con IA</h3>
+            <p>
+                El corazón de FINBOT es su chat inteligente, donde el usuario puede plantear preguntas financieras en
+                lenguaje natural. La arquitectura event-driven garantiza que cada mensaje enviado active automáticamente
+                una Cloud Function que consulta el perfil completo del usuario —incluyendo métricas actualizadas,
+                hábitos y contexto financiero— para generar una respuesta personalizada mediante la API de Gemini. El
+                resultado es un asesor que no solo responde, sino que comprende la situación particular de cada persona.
+            </p>
+
+            <h3>3.3 Seguimiento de hábitos y metas</h3>
+            <p>
+                FINBOT permite registrar y monitorear hábitos financieros positivos, así como establecer metas de ahorro
+                con plazos definidos. El dashboard en tiempo real presenta los avances mediante indicadores visuales e
+                insights generados automáticamente, convirtiendo la gestión financiera en un proceso continuo y
+                motivador. </p>
+
+            <h3>3.4 Gestión inteligente de deudas</h3>
+            <p>
+                El módulo de deudas permite al usuario registrar sus compromisos financieros activos y recibir
+                recomendaciones estratégicas sobre priorización de pagos, simulación de adelantos y proyección de fechas
+                de liquidación. El sistema limita el registro a cinco deudas activas en su versión MVP para mantener la
+                experiencia enfocada y procesable.
+            </p>
+
+            <h3>3.5 Registro de gastos y aprendizaje</h3>
+            <p>
+                FINBOT incorpora un modo de aprendizaje que permite al usuario registrar sus gastos diarios y recibir
+                retroalimentación inmediata sobre el impacto de cada decisión en su salud financiera. Este módulo
+                combina el registro transaccional con micro-lecciones contextualizadas, donde cada gasto registrado se
+                convierte en una oportunidad de aprendizaje. El asistente de IA analiza patrones de gasto y ofrece
+                sugerencias proactivas para optimizar el uso del ingreso. </p>
+
+            <h3>3.6 Videos educativos</h3>
+            <p>
+                La plataforma incluye una sección dedicada a contenido de video educativo sobre finanzas personales. Los
+                videos cubren temas fundamentales como ahorro, inversión, manejo de deudas, presupuesto y planificación
+                financiera, presentados de manera accesible y adaptados al perfil del usuario. Este contenido
+                complementa la orientación personalizada del chatbot, ofreciendo una experiencia de aprendizaje
+                multimedia que refuerza los conceptos clave de educación financiera. </p>
+
+        </section>
+
+        <section id="educacion-inclusion">
+            <h2>4. Educación e Inclusión Financiera</h2>
+
+            <p>
+                FINBOT responde directamente al reto de desarrollar soluciones tecnológicas que fortalezcan la educación
+                financiera e impulsen la inclusión financiera, facilitando el acceso a información clara, herramientas
+                digitales y experiencias de aprendizaje que ayuden a estudiantes y jóvenes a tomar mejores decisiones
+                económicas y ampliar sus oportunidades de desarrollo personal y profesional. </p>
+
+            <h3>4.1 Fortalecimiento de la educación financiera</h3>
+
+            <p>FINBOT transforma la educación financiera de un ejercicio teórico a una experiencia práctica y aplicada.
+                En lugar de presentar contenido genérico desconectado de la realidad del usuario, la plataforma enseña
+                conceptos financieros en el momento exacto en que el usuario los necesita: al evaluar un crédito, al
+                decidir entre ahorrar o invertir, al analizar si puede asumir un gasto extraordinario.</p>
+            <ul>
+                <li>El asistente con IA traduce métricas técnicas (ratio de liquidez, índice de endeudamiento, capacidad
+                    de ahorro) a explicaciones comprensibles para cualquier nivel de alfabetización financiera.</li>
+                <li>Las simulaciones a distintos horizontes de tiempo permiten al usuario visualizar consecuencias y
+                    aprender por experimentación segura, sin arriesgar dinero real.</li>
+                <li>El sistema de gamificación con score financiero educativo, rachas de hábitos y refuerzos positivos
+                    convierte el aprendizaje financiero en una experiencia participativa.</li>
+                <li>El onboarding guiado captura el perfil financiero del usuario y le devuelve un diagnóstico inicial
+                    que funciona como punto de partida educativo.</li>
+            </ul>
+
+            <h3>4.2 Impulso a la inclusión financiera</h3>
+            <p>FINBOT democratiza el acceso a orientación financiera de calidad. Históricamente, contar con un asesor
+                financiero personal ha sido un privilegio reservado a personas con patrimonio elevado. FINBOT elimina
+                esa barrera al ofrecer un copiloto inteligente disponible en cualquier momento, desde un dispositivo
+                móvil, sin costo de asesoría y sin necesidad de conocimientos previos.</p>
+
+            <ul>
+                <li>Facilita el acceso a información clara: toda recomendación se presenta en lenguaje natural, directo
+                    y sin jerga técnica innecesaria.</li>
+                <li>Proporciona herramientas digitales accesibles: la app multiplataforma permite que cualquier persona
+                    con un smartphone pueda diagnosticar su salud financiera.</li>
+                <li>Genera experiencias de aprendizaje significativas: cada decisión simulada y cada insight generado
+                    aporta conocimiento aplicable.</li>
+                <li>Ayuda a estudiantes y jóvenes a tomar mejores decisiones económicas al intervenir en etapas
+                    tempranas de la vida financiera.</li>
+                <li>Amplía oportunidades de desarrollo personal y profesional al reducir el estrés financiero que limita
+                    productividad y bienestar.</li>
+            </ul>
+
+            <h3>4.3 Habilitación tecnológica</h3>
+            <p>La combinación de un motor financiero determinista, un asistente de inteligencia artificial contextual y
+                una capa de gamificación responsable permite que FINBOT enseñe de forma adaptativa, prevenga errores
+                antes de que ocurran y acompañe al usuario en su crecimiento financiero. La arquitectura basada en
+                Flutter, Firebase y Gemini garantiza escalabilidad, accesibilidad multiplataforma y capacidad de
+                evolución continua.</p>
+
+        </section>
+
+        <section id="impacto-innovacion">
+            <h2>5. Impacto e Innovación</h2>
+
+            <h3>5.1 Impacto Social</h3>
+            <p>FINBOT atiende una problemática crítica y transversal: la falta de educación financiera práctica entre
+                jóvenes y personas que inician su vida económica. El proyecto se distingue por su capacidad de llegar a
+                una población amplia con una solución cotidiana, móvil y fácil de usar.</p>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Indicador</th>
+                        <th>Impacto estimado</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Población objetivo</td>
+                        <td>Jóvenes mexicanos en etapa de formación económica y primer acceso a productos financieros
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Problema que resuelve</td>
+                        <td>Decisiones financieras mal informadas, ausencia de simulación y baja comprensión del impacto
+                            económico personal</td>
+                    </tr>
+                    <tr>
+                        <td>Valor social</td>
+                        <td>Promueve prevención, aprendizaje continuo e inclusión financiera responsable</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>5.2 Innovación Tecnológica</h3>
+            <p>A diferencia de las aplicaciones financieras convencionales que se limitan a mostrar saldos o categorizar
+                gastos, FINBOT introduce un paradigma conversacional donde la inteligencia artificial no actúa como un
+                chatbot genérico, sino como un asesor que conoce en profundidad el contexto financiero del usuario. Cada
+                respuesta del asistente se genera a partir de un prompt enriquecido con datos reales actualizados en
+                tiempo real desde Firestore.</p>
+
+            <h3>5.3 Democratiización del Acceso a la Información Financiera</h3>
+            <p>La arquitectura multiplataforma de Flutter permite que FINBOT llegue a usuarios de Android, iOS, web y
+                escritorio con una sola base de código, eliminando barreras de acceso tecnológico. Combinado con una
+                interfaz diseñada para la claridad y la accesibilidad, FINBOT permite que cualquier persona, sin
+                importar su nivel de conocimiento financiero previo, pueda beneficiarse de un diagnóstico y
+                acompañamiento de calidad profesional.</p>
+
+        </section>
+
+        <section id="mision-vision-mercado">
+            <h2>6. Misión, Visión y Segmento de Mercado</h2>
+
+            <h3>6.1 Misión</h3>
+            <p>
+                Transformar la relación de las personas con sus finanzas personales mediante tecnología inteligente y
+                accesible, proporcionando diagnósticos claros, recomendaciones personalizadas y acompañamiento continuo
+                que impulsen decisiones económicas informadas y responsables. </p>
+
+            <h3>6.2 Visión</h3>
+            <p>
+                Ser la plataforma líder en asistencia financiera basada en inteligencia artificial en América Latina,
+                reconocida por su capacidad para reducir la brecha de educación financiera y empoderar a millones de
+                usuarios en la construcción de su estabilidad económica. </p>
+
+            <h3>6.3 Segmento de mercado</h3>
+            <p>FINBOT se dirige principalmente a dos segmentos de la población mexicana:</p>
+
+            <ul>
+                <li>Estudiantes universitarios y jóvenes profesionales (18-30 años): personas en etapa de formación
+                    económica que necesitan establecer hábitos financieros saludables desde el inicio de su vida adulta.
+                </li>
+                <li>Trabajadores con ingresos medios y bajos (25-45 años): personas que manejan presupuestos ajustados,
+                    enfrentan decisiones de endeudamiento y buscan herramientas prácticas para mejorar su salud
+                    financiera sin costos adicionales.</li>
+            </ul>
+
+        </section>
+
+        <section id="arquitectura-sistema">
+            <h2>7. Arquitectura del Sistema</h2>
+            <p>FINBOT opera sobre una arquitectura distribuida y orientada a eventos, compuesta por tres capas
+                principales que interactúan de forma desacoplada:</p>
+
+            <h3>7.1 Capa de presentación (Frontend)</h3>
+            <ul>
+                <li>Aplicación Flutter multiplataforma (Android, iOS, web, escritorio).</li>
+                <li>Punto de entrada en lib/main.dart con gestión de autenticación, navegación y UI principal.</li>
+                <li>Interfaz con temas claro/oscuro configurables mediante FinBotColors.</li>
+                <li>Consumo de streams en tiempo real desde Firestore para dashboard, métricas e insights.</li>
+            </ul>
+
+            <h3>7.2 Capa de datos y persistencia</h3>
+            <ul>
+                <li>Cloud Firestore como base de datos principal con sincronización en tiempo real.</li>
+                <li>Servicio centralizado en lib/services/firestore_service.dart para todas las operaciones CRUD.</li>
+                <li>Modelos de dominio en lib/models/*.dart con serialización snake_case para Firestore.</li>
+                <li>Firebase Authentication para gestión de sesiones de usuario.</li>
+            </ul>
+
+            <h3>7.3 Capa backend (Event-driven)</h3>
+            <ul>
+                <li>Cloud Function chatWithFinbot en functions/src/index.ts.</li>
+                <li>Trigger automático mediante onDocumentCreated al crear mensajes de chat.</li>
+                <li>Consulta de perfil de usuario y métricas financieras para construir prompt contextual.</li>
+                <li>Invocación de Gemini API para generación de respuesta personalizada.</li>
+                <li>Persistencia de respuesta del asistente en la misma subcolección de mensajes.</li>
+            </ul>
+
+            <h3>7.4 Diagrama de flujo general</h3>
+            <img src="resources/diagrama_flujo.png" alt="Diagrama de flujo de FINBOT" class="imagen-diagrama">
+
+
+        </section>
+
+        <section id="stack-tecnologico">
+            <h2>8. Stack Tecnológico</h2>
+            <p>La elección de cada componente del stack responde a criterios de velocidad de desarrollo, escalabilidad,
+                costo operativo y madurez del ecosistema:</p>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Capa</th>
+                        <th>Tecnología</th>
+                        <th>Justificación</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Frontend movil</td>
+                        <td>Flutter / Dart SDK ^3.11.1</td>
+                        <td>Framework multiplataforma con rendimiento nativo y una sola base de código para Android,
+                            iOS, Web y Desktop.</td>
+                    </tr>
+                    <tr>
+                        <td>Autenticación</td>
+                        <td>Firebase Authentication</td>
+                        <td>Gestión segura de sesiones con soporte para email/password, Google Sign-In y otros
+                            proveedores.</td>
+                    </tr>
+                    <tr>
+                        <td>Base de datos</td>
+                        <td>Cloud Firestore</td>
+                        <td>Base de datos NoSQL en tiempo real con sincronización automática, reglas de seguridad por
+                            usuario y escalamiento gestionado.</td>
+                    </tr>
+                    <tr>
+                        <td>Backend serverless</td>
+                        <td>Firebase Functions v2 + TypeScript + Node.js 22</td>
+                        <td>Arquitectura serverless escalable</td>
+                    </tr>
+                    <tr>
+                        <td>IA generativa</td>
+                        <td>@google/generative-ai (Gemini API)</td>
+                        <td>Motor de IA que produce respuestas financieras contextualizadas a partir del perfil y
+                            métricas del usuario.</td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </section>
+
+        <section id="organizacion-repositorio">
+            <h2>9. Organización del Repositorio</h2>
+
+            <img src="resources/repo_org.png" alt="Organización del repositorio de FINBOT" class="imagen-diagrama">
+
+        </section>
+
+        <section id="modulos-funcionales">
+            <h2>10. Módulos Funcionales del Frontend</h2>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Módulos</th>
+                        <th>Clases / Páginas</th>
+                        <th>Responsabilidad</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Bootstrap y Tema</td>
+                        <td>main(), FinBotApp, FinBotColors</td>
+                        <td>Inicializa Firebase, define temas claro/oscuro y configura MaterialApp.</td>
+
+                    </tr>
+                    <tr>
+                        <td>Acceso y Autenticación</td>
+                        <td>AuthWrapper, LoginPage, RegisterPage</td>
+                        <td>Gestiona sesión con Firebase Auth y redirige según estado del usuario.</td>
+
+                    </tr>
+                    <tr>
+                        <td>Onboarding</td>
+                        <td>OnboardingPage</td>
+                        <td>Captura datos personales y financieros iniciales, calcula score y riesgo base.</td>
+                    </tr>
+                    <tr>
+                        <td>Dashboard</td>
+                        <td>DashboardPage</td>
+                        <td>Consume streams de usuario, métricas, hábitos e insights en tiempo real.</td>
+                    </tr>
+                    <tr>
+                        <td>Perfil</td>
+                        <td>ProfilePage</td>
+                        <td>Edición de campos del perfil y preferencias con persistencia parcial.</td>
+                    </tr>
+                    <tr>
+                        <td>Asistente IA Chatbot</td>
+                        <td>FinBotChatPage</td>
+                        <td>Crea sesión de chat, envía mensajes y escucha respuestas desde Firestore.</td>
+                    </tr>
+                    <tr>
+                        <td>Registro de Gastos</td>
+                        <td>ExpenseTrackerPage</td>
+                        <td>Registro diario de gastos con categorización y retroalimentación del asistente.</td>
+                    </tr>
+                    <tr>
+                        <td>Videos Educativos</td>
+                        <td>EducationalVideosPage</td>
+                        <td>Sección de contenido de video sobre finanzas personales organizado por temas.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section id="modelo-datos-firebase">
+            <h2>11. Modelo de datos Firebase</h2>
+            <p>La estructura de datos sigue un modelo jerárquico centrado en el usuario, donde cada documento principal
+                contiene subcolecciones organizadas por dominio funcional:</p>
+
+            <img src="resources/Firebase_mod.png" alt="Modelo de datos en Firebase de FINBOT" class="imagen-diagrama">
+
+            <p>El servicio FirestoreService concentra todas las operaciones sobre esta estructura, y los modelos en
+                lib/models mantienen consistencia de serialización con claves en snake_case para garantizar un
+                intercambio predecible entre cliente y backend.</p>
+        </section>
+
+        <section id="flujo-chatbot">
+            <h2>12. Flujo del Chatbot con Inteligencia Artificial</h2>
+            <p>El flujo conversacional entre el usuario y el asistente financiero sigue un patrón event-driven que
+                garantiza respuestas personalizadas y en tiempo real:</p>
+
+            <ul>
+                <li>1. La aplicación crea o reutiliza la sesión default_session para el usuario autenticado.</li>
+                <li>2. Cuando el usuario envía un mensaje, se crea un documento en la subcolección messages con role =
+                    "user".</li>
+                <li>3. La Cloud Function chatWithFinbot se dispara automáticamente mediante el trigger
+                    onDocumentCreated.</li>
+                <li>4. La función consulta el perfil completo del usuario: personal_info, financial_profile, preferences
+                    y financial_metrics/current.</li>
+                <li>5. Con toda la información contextual, se construye un prompt enriquecido que incluye el historial
+                    de conversación.</li>
+                <li>6. Se invoca la API de Gemini con el prompt contextualizado para generar la respuesta.</li>
+                <li>7. La respuesta del asistente se persiste como un nuevo documento con role = "assistant" en la misma
+                    subcolección.</li>
+                <li>8. La aplicación Flutter, al escuchar el stream de mensajes, renderiza la respuesta en tiempo real.
+                </li>
+            </ul>
+
+            <h3>12.1 Construcción del prompt contextual</h3>
+            <p>El prompt enviado a Gemini no es genérico. Se construye dinámicamente incluyendo:</p>
+
+            <ul>
+                <li>Datos personales del usuario (nombre, edad, ocupación).</li>
+                <li>Perfil financiero completo (ingresos mensuales, gastos fijos, nivel de ahorro).</li>
+                <li>Métricas financieras actuales (score, ratio de liquidez, índice de endeudamiento).</li>
+                <li>Preferencias del usuario (idioma, estilo de comunicación).</li>
+                <li>Historial reciente de la conversación para mantener coherencia.</li>
+            </ul>
+
+            <p>Este enfoque garantiza que cada respuesta sea específica, relevante y accionable para la situación
+                financiera real del usuario, diferenciándose radicalmente de los chatbots genéricos.</p>
+
+        </section>
+
+        <section id="documentacion-apis">
+            <h2>13. Documentación de APIs</h2>
+
+            <h3>13.1 Api Backend (Cloud Functions)</h3>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Tipo</th>
+                        <th>Disparador</th>
+                        <th>Archivo</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>chatWithFinbot</td>
+                        <td>Event-driven (Firestore Trigger)</td>
+                        <td>onDocumentCreated("users/{userId}/chat_sessions/{sessionId}/messages/{messageId}")</td>
+                        <td>functions/src/index.ts</td>
+                    </tr>
+
+                </tbody>
+            </table>
+            <p>Propósito: generar respuestas del asistente financiero usando Gemini en función del contexto del usuario
+                y el historial de chat.</p>
+
+            <h3>13.2 Contrato de entrada/salida del chat</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Elemento</th>
+                        <th>Campos clave</th>
+                        <th>Notas</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Entrada (mensaje del usuario)</td>
+                        <td>role, content, timestamp, is_error</td>
+                        <td>Solo se procesa cuando role === "user" y no hay error.</td>
+                    </tr>
+                    <tr>
+                        <td>Salida (respuesta del asistente)</td>
+                        <td>role: "assistant", content, timestamp, is_error</td>
+                        <td>La función escribe el mensaje de respuesta en la misma subcolección.</td>
+                    </tr>
+                    <tr>
+                        <td>Contexto adicional</td>
+                        <td>personal_info, financial_profile, preferences, financial_metrics/current</td>
+                        <td>Se consulta para personalizar el prompt y la recomendación financiera.</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>13.3 Ejemplos de payloads</h3>
+            <img src="resources/payload_ex.png"
+                alt="Ejemplo de payload de entrada y salida en la función chatWithFinbot" class="imagen-diagrama">
+
+            <h3>13.4 APIs de datos (capa de aplicación)</h3>
+            <p>La app consume APIs gestionadas por el SDK de Firebase. No expone endpoints REST propios:</p>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Grupo</th>
+                        <th>Operaciones principales</th>
+                        <th>Referencia</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Autenticación</td>
+                        <td>authStateChanges, signInWithEmailAndPassword, signOut</td>
+                        <td>lib/main.dart</td>
+                    </tr>
+                    <tr>
+                        <td>Usuarios / Perfil</td>
+                        <td>saveUser, saveUserRaw, streamUser, getUser</td>
+                        <td>lib/services/firestore_service.dart</td>
+                    </tr>
+                    <tr>
+                        <td>Métricas y Hábitos</td>
+                        <td>streamMetrics, updateMetrics, streamHabitTracking, updateHabitTracking</td>
+                        <td>lib/services/firestore_service.dart</td>
+                    </tr>
+                    <tr>
+                        <td>Gestión Financiera</td>
+                        <td>streamDebts, addDebt, deleteDebt, streamGoals, saveGoal</td>
+                        <td>lib/services/firestore_service.dart</td>
+                    </tr>
+                    <tr>
+                        <td>Insights y eventos</td>
+                        <td>streamInsights, markInsightAsRead, streamFinancialEvents, addFinancialEvent</td>
+                        <td>lib/services/firestore_service.dart</td>
+                    </tr>
+                    <tr>
+                        <td>Chatbot</td>
+                        <td>createChatSession, sendMessage, streamChatMessages</td>
+                        <td>lib/services/firestore_service.dart</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>13.5 Manejo de errores y limites</h3>
+            <ul>
+                <li>Función de chat: en caso de error escribe mensaje fallback con is_error: true.</li>
+                <li>Límite MVP: addDebt valida un máximo de 5 deudas activas por usuario.</li>
+                <li>Escalado: chatWithFinbot define maxInstances: 10 para controlar concurrencia.</li>
+            </ul>
+        </section>
+
+        <section id="seguridad">
+            <h2>14. Seguridad</h2>
+
+            <h3>14.1 Firestore Security Rules</h3>
+            <p>Las reglas de Firestore restringen el acceso mediante la validación request.auth.uid == userId, lo que
+                garantiza aislamiento multiusuario completo. Cada usuario solo puede leer y escribir en su propio
+                documento y subcolecciones.</p>
+
+            <h3>14.2 Storage Rules</h3>
+            <p>Las reglas de Firebase Storage actualmente presentan una apertura temporal hasta 2026-04-07 que
+                representa un riesgo alto de seguridad. Se recomienda endurecer estas reglas antes de la fecha de
+                vencimiento, implementando permisos basados en usuario y ruta específica.</p>
+
+            <h3>14.3 Gestión de secretos</h3>
+            <ul>
+                <li>La Cloud Function utiliza el secreto GEMINI_API_KEY gestionado por Firebase Secrets, evitando
+                    exponer la llave en el código TypeScript.</li>
+                <li>• Las credenciales de Firebase Web están embebidas en el código cliente, práctica estándar pero
+                    recomendable de gestionar por ambientes (dev/stg/prod).</li>
+            </ul>
+
+        </section>
+
+        <section id="escalabilidad">
+            <h2>15 Escalabilidad</h2>
+            <p>La arquitectura de FINBOT ha sido diseñada con escalabilidad como principio rector. La combinación de
+                Flutter en el frontend, Firebase como backend-as-a-service y Cloud Functions como capa de procesamiento
+                serverless permite que la plataforma crezca de manera orgánica sin necesidad de reescribir componentes
+                fundamentales.</p>
+
+            <h3>15.1 Arquitectura modular y orientada a eventos</h3>
+            <p>El sistema sigue un patrón event-driven donde las interacciones del usuario generan documentos en
+                Firestore que disparan automáticamente funciones de backend. Esta separación de responsabilidades
+                permite escalar cada capa de forma independiente.</p>
+
+            <h3>15.2 Escalabilidad funcional</h3>
+            <p>Desde la perspectiva funcional, el producto puede escalar desde un uso individual hasta esquemas de
+                adopción con universidades, programas de inclusión e instituciones financieras. El mismo núcleo de
+                cálculo puede reutilizarse y parametrizarse para distintos contextos.</p>
+        </section>
+
+        <section id="merito-tecnico">
+            <h2>16. Mérito Técnico</h2>
+            <p>La fortaleza técnica de FINBOT reside en la integración ordenada de componentes que cumplen funciones
+                distintas pero complementarias:</p>
+
+            <ul>
+                <li>Capa de experiencia: interfaz Flutter clara, ligera e intuitiva.</li>
+                <li>Capa lógica: motor financiero determinista con métricas objetivas de liquidez, deuda, ahorro y
+                    riesgo.</li>
+                <li>Capa inteligente: asistente IA contextual que explica resultados sin romper coherencia con el
+                    análisis numérico.</li>
+                <li>Capa de datos: Firestore con sincronización en tiempo real y modelo jerárquico centrado en el
+                    usuario.</li>
+            </ul>
+            <p>El acoplamiento entre cálculo técnico y lenguaje natural es uno de los principales méritos del proyecto,
+                porque convierte un resultado financiero complejo en una recomendación entendible y accionable.</p>
+        </section>
+
+        <section id="viabilidad-proyecto">
+            <h2>17. Viabilidad del proyecto</h2>
+            <h3>17.1 Viabilidad técnica</h3>
+            <p>FINBOT se construye sobre tecnologías probadas y ampliamente adoptadas. Flutter cuenta con soporte
+                oficial de Google. Firebase ofrece un modelo de costos escalable con generosas cuotas gratuitas para
+                MVPs. Gemini proporciona IA generativa de frontera sin necesidad de entrenar modelos propios, reduciendo
+                significativamente esfuerzo y costos operativos.</p>
+
+            <h3>17.2 Viabilidad operativa</h3>
+            <p>La arquitectura serverless elimina la necesidad de gestionar infraestructura dedicada. Los despliegues
+                automatizados mediante Firebase CLI y la compilación integrada reducen fricción operativa. El modelo
+                event-driven simplifica la adición de nuevas funcionalidades.</p>
+
+            <h3>17.3 Viabilidad de mercado</h3>
+            <p>La ENSAFI del INEGI evidencia que una proporción significativa de la población mexicana experimenta
+                estrés financiero y carece de herramientas adecuadas. FINBOT se posiciona en un segmento de alta demanda
+                y baja oferta: asistencia financiera personalizada con IA, accesible desde dispositivos móviles y sin
+                costo para el usuario final en su versión básica.</p>
+        </section>
+
+        <section id="roadmap-ejecucion">
+            <h2>18. Roadmap de ejecución</h2>
+
+            <h3>18.1 Fase 1: Asegurar y estabilizar</h3>
+            <ul>
+                <li>Endurecer storage.rules con permisos específicos por usuario/ruta.</li>
+                <li>Agregar logging estructurado con correlation IDs en Cloud Functions.</li>
+                <li>Actualizar documentación técnica y operativa alineada al código.</li>
+                <li>Implementar pruebas unitarias base para modelos y servicios clave.</li>
+            </ul>
+
+            <h3>18.2 Fase 2: Modularizar</h3>
+            <ul>
+                <li>Separar lib/main.dart por módulos: auth/, onboarding/, dashboard/, chat/.</li>
+                <li>Dividir FirestoreService en servicios por dominio (usuario, métricas, deudas, metas, chat).</li>
+                <li>Definir e implementar índices Firestore según consultas reales.</li>
+                <li>Agregar pruebas para la capa de servicios.</li>
+            </ul>
+
+            <h3>18.3 Fase 3: Escalar</h3>
+            <ul>
+                <li>Introducir gestión de estado consistente (Riverpod o Bloc).</li>
+                <li>Pipeline CI automatizada: lint + test + build.</li>
+                <li>Versionado de prompts y controles de calidad del chat IA.</li>
+                <li>Dashboard de observabilidad (errores, latencia, uso).</li>
+            </ul>
+        </section>
+
+        <section id="riesgos-mitigaciones">
+            <h2>19. Riesgos y Mitigaciones</h2>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Riesgo</th>
+                        <th>Nivel</th>
+                        <th>Impacto</th>
+                        <th>Mitigación</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Reglas de Storage temporalmente abiertas</td>
+                        <td>Alto</td>
+                        <td>Exposición de datos y riesgo reputacional</td>
+                        <td>Cerrar reglas por usuario/path y validar accesos</td>
+                    </tr>
+                    <tr>
+                        <td>Monolito UI en main.dart</td>
+                        <td>Medio</td>
+                        <td>Menor velocidad de cambios y más errores</td>
+                        <td>Refactor incremental por módulos de negocio</td>
+                    </tr>
+                    <tr>
+                        <td>Sin índices definidos para crecimiento</td>
+                        <td>Medio</td>
+                        <td>Degradación de consultas y costos operativos</td>
+                        <td>Diseñar e implementar índices Firestore</td>
+                    </tr>
+                    <tr>
+                        <td>Cobertura de pruebas limitada</td>
+                        <td>Medio</td>
+                        <td>Regresiones silenciosas y ciclos de corrección caros</td>
+                        <td>Suite mínima de unit tests + pipeline CI</td>
+                    </tr>
+                    <tr>
+                        <td>Costos de IA por mayor uso</td>
+                        <td>Medio</td>
+                        <td>Incremento de costos operativos</td>
+                        <td>Cuotas, guardrails de prompt y límites por sesión</td>
+                    </tr>
+                    <tr>
+                        <td>Consultas Firestore lentas al crecer datos</td>
+                        <td>Alto</td>
+                        <td>Degradación de experiencia de usuario</td>
+                        <td>Índices compuestos y revisión periódica de consultas</td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </section>
+
+        <section id="kpis-seguimiento">
+            <h2>20. KPIs de Seguimiento</h2>
+
+            <ul>
+                <li>Velocidad de entrega: lead time por feature (objetivo: tendencia descendente).</li>
+                <li>Calidad: defectos post-release por sprint (objetivo: reducción sostenida).</li>
+                <li>Confiabilidad: errores críticos en chat/backend por semana.</li>
+                <li>Seguridad: cumplimiento 100% de reglas de acceso sin excepciones abiertas.</li>
+                <li>Escalado: latencia p95 en operaciones críticas de datos.</li>
+                <li>Adopción: usuarios activos diarios y tasa de retención semanal.</li>
+                <li>Efectividad pedagógica: mejora promedio del score financiero por usuario activo.</li>
+            </ul>
+
+        </section>
+
+        <section id="conclusiones">
+            <h2>21. Conclusiones</h2>
+
+            <p>
+                FINBOT representa una propuesta sólida, viable y de alto impacto social para abordar la brecha de
+                educación e inclusión financiera entre los jóvenes mexicanos. La combinación de un motor financiero
+                determinista, un asistente conversacional impulsado por inteligencia artificial generativa (Gemini) y
+                una experiencia de usuario gamificada posiciona al proyecto como una solución innovadora que va más allá
+                de las aplicaciones financieras convencionales.
+            </p>
+
+            <p>
+                Desde la perspectiva técnica, la arquitectura basada en Flutter, Firebase y Cloud Functions proporciona
+                una base escalable, de bajo costo operativo y con capacidad de evolución continua. El modelo
+                event-driven y la integración contextual con Gemini garantizan que las recomendaciones sean
+                personalizadas, relevantes y accionables para cada usuario.
+            </p>
+
+            <p>El MVP actual demuestra un flujo completo y funcional que incluye onboarding, dashboard en tiempo real,
+                gestión de deudas, seguimiento de hábitos y chat con IA. El roadmap de 90 días establece una ruta clara
+                para madurar la plataforma en seguridad, modularidad, calidad de código y observabilidad, preparándola
+                para su siguiente fase de crecimiento.</p>
+
+            <p>FINBOT no es únicamente una herramienta de consulta financiera: es un ecosistema de aprendizaje y
+                decisión diseñado para cerrar la brecha de educación e inclusión financiera, utilizando tecnología
+                accesible, inteligencia artificial responsable y una experiencia centrada en el usuario.</p>
+
+
+
+        </section>
+
+        <section id="referencias">
+            <h2>23. Referencias</h2>
+
+            <ul>
+                <li>9. INEGI. Encuesta Nacional de Inclusión Financiera (ENIF), edición más reciente consultada para
+                    contextualizar el problema de acceso y uso de productos financieros en México.</li>
+                <li>10. INEGI. Encuesta Nacional sobre Salud Financiera (ENSAFI), utilizada como referencia para
+                    comprender hábitos, estrés financiero y capacidad de respuesta económica de la población.</li>
+                <li>11. Banco de México y materiales de educación financiera de instituciones públicas y privadas,
+                    considerados como marco de referencia para la pertinencia del proyecto.</li>
+                <li>12. CONDUSEF. Programas de educación financiera y estadísticas sobre quejas y reclamaciones de
+                    usuarios de servicios financieros en México.</li>
+                <li>13. Google. Documentación oficial de Flutter, Firebase y Gemini API, consultada como referencia
+                    técnica para la implementación de la arquitectura del proyecto.</li>
+                <li>14. Google. Documentación de Cloud Firestore Security Rules y Firebase Authentication para la
+                    implementación de políticas de acceso.</li>
+                <li>15. Dart/Flutter Team. Guías oficiales de arquitectura de aplicaciones Flutter y patrones de gestión
+                    de estado.</li>
+            </ul>
+
+        </section>
+
+    </main>
+
+    <footer>
+        <p> Documentación Técnica Profesional del Proyecto</p>
+        <p> Equipo: Finbot</p>
+        <p>Versión: 1.1 — Documento integral de propuesta y arquitectura técnica</p>
+    </footer>
+
+</body>
+
+</html>
