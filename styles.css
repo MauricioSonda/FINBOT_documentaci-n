@@ -237,73 +237,7 @@ footer strong {
 }
 
 
-/* ---------- RESPONSIVE ---------- */
-
-@media (max-width: 900px) {
-
-    main {
-        padding: 25px;
-    }
-
-    header h1 {
-        font-size: 2.2rem;
-    }
-
-    section:first-of-type ol {
-        columns: 1;
-    }
-}
-
-/* ---------- RESPONSIVE MOVIL ---------- */
-
-@media (max-width: 768px) {
-
-    body {
-        overflow-x: hidden;
-    }
-
-    main {
-        width: 100%;
-        max-width: 100%;
-        margin: 0;
-        padding: 20px 15px;
-    }
-
-    header {
-        padding: 50px 15px 35px 15px;
-    }
-
-    header h1 {
-        font-size: 2rem;
-    }
-
-    section {
-        width: 100%;
-    }
-
-    /* tablas adaptables */
-    table {
-        display: block;
-        overflow-x: auto;
-        width: 100%;
-    }
-
-    /* bloques de código adaptables */
-    pre {
-        overflow-x: auto;
-        white-space: pre-wrap;
-        word-wrap: break-word;
-    }
-
-    /* evitar que imágenes rompan el layout */
-    img {
-        max-width: 100%;
-        height: auto;
-    }
-
-}
-
-/* ---------- CORRECCION MOVIL ---------- */
+/* ---------- RESPONSIVE MOVIL LIMPIO ---------- */
 
 @media (max-width: 768px) {
 
@@ -312,49 +246,88 @@ footer strong {
         overflow-x:hidden;
     }
 
+    /* contenedor principal */
     main{
         width:100%;
         max-width:100%;
-        margin:0 auto;
-        padding:20px;
+        margin:0;
+        padding:20px 16px;
         box-shadow:none;
     }
 
-    section{
-        width:100%;
+    /* header */
+    header{
+        padding:25px 15px;
     }
 
-    /* ---------- IMAGENES ---------- */
+    header h1{
+        font-size:2rem;
+    }
 
+    header strong{
+        font-size:1.1rem;
+    }
+
+    header p{
+        font-size:0.9rem;
+    }
+
+    /* secciones */
+    section{
+        margin-bottom:35px;
+    }
+
+    h2{
+        font-size:1.5rem;
+    }
+
+    h3{
+        font-size:1.2rem;
+    }
+
+    p{
+        text-align:left;
+    }
+
+    /* indice en una sola columna */
+    section:first-of-type ol{
+        columns:1;
+    }
+
+    /* listas */
+    ul, ol{
+        margin-left:20px;
+    }
+
+    /* tablas */
+    table{
+        display:block;
+        width:100%;
+        overflow-x:auto;
+        font-size:0.9rem;
+    }
+
+    /* imagenes */
     img{
         display:block;
-        max-width:100%;
         width:100%;
+        max-width:100%;
         height:auto;
         margin:20px auto;
     }
 
-    /* imagenes de diagramas */
     .imagen-diagrama{
         width:100%;
         max-width:100%;
         margin:20px auto;
     }
 
-    /* ---------- TABLAS ---------- */
-
-    table{
-        width:100%;
-        display:block;
-        overflow-x:auto;
-    }
-
-    /* ---------- CODIGO ---------- */
-
+    /* codigo */
     pre{
         overflow-x:auto;
         white-space:pre-wrap;
         word-break:break-word;
+        font-size:0.85rem;
     }
 
 }
