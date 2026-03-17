@@ -365,10 +365,6 @@
                 <li>Persistencia de respuesta del asistente en la misma subcolección de mensajes.</li>
             </ul>
 
-            <h3>7.4 Diagrama de flujo general</h3>
-            <img src="resources/diagrama_flujo.png" alt="Diagrama de flujo de FINBOT" class="imagen-diagrama">
-
-
         </section>
 
         <section id="stack-tecnologico">
@@ -426,51 +422,42 @@
                 <thead>
                     <tr>
                         <th>Módulos</th>
-                        <th>Clases / Páginas</th>
                         <th>Responsabilidad</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
                         <td>Bootstrap y Tema</td>
-                        <td>main(), FinBotApp, FinBotColors</td>
                         <td>Inicializa Firebase, define temas claro/oscuro y configura MaterialApp.</td>
 
                     </tr>
                     <tr>
                         <td>Acceso y Autenticación</td>
-                        <td>AuthWrapper, LoginPage, RegisterPage</td>
                         <td>Gestiona sesión con Firebase Auth y redirige según estado del usuario.</td>
 
                     </tr>
                     <tr>
                         <td>Onboarding</td>
-                        <td>OnboardingPage</td>
                         <td>Captura datos personales y financieros iniciales, calcula score y riesgo base.</td>
                     </tr>
                     <tr>
                         <td>Dashboard</td>
-                        <td>DashboardPage</td>
                         <td>Consume streams de usuario, métricas, hábitos e insights en tiempo real.</td>
                     </tr>
                     <tr>
                         <td>Perfil</td>
-                        <td>ProfilePage</td>
                         <td>Edición de campos del perfil y preferencias con persistencia parcial.</td>
                     </tr>
                     <tr>
                         <td>Asistente IA Chatbot</td>
-                        <td>FinBotChatPage</td>
                         <td>Crea sesión de chat, envía mensajes y escucha respuestas desde Firestore.</td>
                     </tr>
                     <tr>
                         <td>Registro de Gastos</td>
-                        <td>ExpenseTrackerPage</td>
                         <td>Registro diario de gastos con categorización y retroalimentación del asistente.</td>
                     </tr>
                     <tr>
                         <td>Videos Educativos</td>
-                        <td>EducationalVideosPage</td>
                         <td>Sección de contenido de video sobre finanzas personales organizado por temas.</td>
                     </tr>
                 </tbody>
